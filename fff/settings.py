@@ -127,9 +127,15 @@ import chartkick
 import os
 
 PROJECT_DIR=os.path.dirname(__file__)
-STATIC_ROOT=os.path.join(PROJECT_DIR, 'graphs','static')
-STATIC_URL = '/fff/static/'
+STATIC_ROOT=os.path.join(PROJECT_DIR) #, 'graphs','static')
+STATIC_URL =os.path.join(PROJECT_DIR, 'static') #, 'graphs','static')
+# STATIC_URL = '/fff/static/'
 
 STATICFILES_DIRS = (
     chartkick.js(),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
 )
