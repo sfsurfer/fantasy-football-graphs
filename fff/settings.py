@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'fff.urls'
@@ -126,12 +127,11 @@ USE_TZ = True
 import chartkick
 import os
 
-PROJECT_DIR=os.path.dirname(__file__)
-STATIC_ROOT=os.path.join(PROJECT_DIR) #, 'graphs','static')
-STATIC_URL =os.path.join(PROJECT_DIR, 'static') #, 'graphs','static')
-# STATIC_URL = '/fff/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
     chartkick.js(),
 )
 
@@ -139,3 +139,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
 )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
