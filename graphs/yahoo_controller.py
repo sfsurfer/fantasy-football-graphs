@@ -35,6 +35,9 @@ class YahooController():
     "consumer_secret": "%s"
 }
         """ % (os.environ['YAHOO_KEY'],os.environ['YAHOO_SECRET']))
+        logger.log("Successfully created secrets file", Logger.INFO)
+        with open(self.secrets_file) as f:
+            logger.log(f.read(), Logger.INFO)
       else:
         self.logger.log("Must have 'YAHOO_KEY' and 'YAHOO_SECRET' environment variables set!", Logger.ERROR)
 
