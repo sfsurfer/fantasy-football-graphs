@@ -16,9 +16,25 @@ class YahooController():
     self.scoreboards = {}
     self.logger = Logger()
     self.logger.set_level(Logger.INFO)
+    self.init_secrets()
     self.authenticate()
     self.get_teams_for_user()
     self.get_scoreboards_for_user()
+
+  def init_secrets(self):
+    secrets_file = './secrets.json'
+    if not isfile(secrets_file) or not access(secrets_file,R_OK):
+      if 'YAHOO_KEY' in os.environ and 'YAHOO_SECRET' in os.environ:
+        f = open(secrets_file, 'w')
+        f.write("""
+{
+    "consumer_key": "%s",
+    "consumer_secret": "%s"
+}
+        """ % (os.environ['YAHOO_KEY'],os.environ['YAHOO_SECRET']))
+      else:
+        self.logger.log("Must have 'YAHOO_KEY' and 'YAHOO_SECRET' environment variables set!", Logger.ERROR)
+
 
   def authenticate(self):
     self.oauth = OAuth2(None, None, from_file='./secrets.json')
