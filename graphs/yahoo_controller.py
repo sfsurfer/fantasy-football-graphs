@@ -28,7 +28,7 @@ class YahooController():
   def init_secrets(self):
     if not isfile(self.secrets_file) or not access(self.secrets_file,R_OK):
       if 'YAHOO_KEY' in os.environ and 'YAHOO_SECRET' in os.environ:
-        f = open(secrets_file, 'w')
+        f = open(self.secrets_file, 'w')
         f.write("""
 {
     "consumer_key": "%s",
