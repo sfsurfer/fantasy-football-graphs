@@ -11,6 +11,7 @@ from os.path import isfile
 
 class YahooController():
   def __init__(self):
+    self.secrets_file = os.path.join(BASE_DIR, 'secrets.json')
     self.curr_week = {}
     self.curr_week_sb = {}
     self.league_end_dates = {}
@@ -24,8 +25,7 @@ class YahooController():
     self.get_scoreboards_for_user()
 
   def init_secrets(self):
-    secrets_file = './secrets.json'
-    if not isfile(secrets_file) or not access(secrets_file,R_OK):
+    if not isfile(self.secrets_file) or not access(self.secrets_file,R_OK):
       if 'YAHOO_KEY' in os.environ and 'YAHOO_SECRET' in os.environ:
         f = open(secrets_file, 'w')
         f.write("""
@@ -37,9 +37,8 @@ class YahooController():
       else:
         self.logger.log("Must have 'YAHOO_KEY' and 'YAHOO_SECRET' environment variables set!", Logger.ERROR)
 
-
   def authenticate(self):
-    self.oauth = OAuth2(None, None, from_file='./secrets.json')
+    self.oauth = OAuth2(None, None, from_file=self.secrets_file)
 
   def yapi_get(self, url):
     if not self.oauth:
