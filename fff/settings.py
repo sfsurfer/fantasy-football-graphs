@@ -25,7 +25,7 @@ SECRET_KEY = '_+*dtchv3*5q6do^m!@)g$b3*@j9umbuanqgur4#8dtgd6g@19'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fantasy-football-graphs.herokuapp.com']
 
 
 # Application definition
