@@ -10,8 +10,9 @@ from os import access, R_OK
 from os.path import isfile
 
 class YahooController():
+
   def __init__(self):
-    self.secrets_file = os.path.join(BASE_DIR, 'secrets.json')
+    self.secrets_file = './secrets.json'
     self.curr_week = {}
     self.curr_week_sb = {}
     self.league_end_dates = {}
